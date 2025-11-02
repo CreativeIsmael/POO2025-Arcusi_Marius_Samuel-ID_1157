@@ -18,5 +18,8 @@
     <ClCompile Include="Activitate01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Activitate02.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
