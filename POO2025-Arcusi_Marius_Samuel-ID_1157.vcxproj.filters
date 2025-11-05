@@ -27,5 +27,8 @@
     <ClCompile Include="Proiect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Activitate04.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
