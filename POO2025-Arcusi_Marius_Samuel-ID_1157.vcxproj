@@ -126,6 +126,7 @@
     <ClCompile Include="Activitate01.cpp" />
     <ClCompile Include="Activitate02.cpp" />
     <ClCompile Include="Activitate03.cpp" />
+    <ClCompile Include="Proiect.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
