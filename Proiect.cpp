@@ -2,21 +2,32 @@
 #include <string>
 using namespace std;
 
-int idArc = 1;
-int idSageata = 0;
-int idManusi = 0;
 
 class Arc {
 public:  
-    
-    Arc() : id(idArc++), model(nullptr), culoare(nullptr), pret(0.0f) {}
+
+    //Constructor
+
+    Arc() : id(++idArc), model(nullptr), culoare(nullptr), pret(0.0f) {}
     int getId() const { return id; }
 
+    //Metode Publice
+
     void descriere() {
-        cout << "Aceasta este descrierea unui arc!" << endl;
+        cout << "Descriere Arc:" << endl;
+        cout << "ID: " << id << endl;
+        cout << "Model: " << (model ? model : "necunoscut") << endl;
+        cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
+        cout << "Pret: " << pret << endl << endl;
     }
 
+    void modificaCuloare(char* culoareNoua) {
+        this->culoare = culoareNoua;
+    }
 private:
+
+     static int idArc;
+
     const int id;
     char* model;
     char* culoare;
@@ -25,13 +36,29 @@ private:
 
 class Sageata {
 public:
-    Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("lemn"), pret(0.0f) {}
+
+    //Constructor
+
+    Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("necunoscut"), pret(0.0f) {}
+
+    //Metode publice
 
     void descriere() {
-        cout << "Aceasta este descrierea unei sageti!" << endl;
+        cout << "Descriere Sageata:" << endl;
+        cout << "ID: " << id << endl;
+        cout << "Model: " << (model ? model : "necunoscut") << endl;
+        cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
+        cout << "Material: " << material << endl;
+        cout << "Pret: " << pret << endl << endl;
     }
 
+    void modificaCuloare(char* culoareNoua) {
+        this->culoare = culoareNoua;
+    }
 private:
+
+   static int idSageata;
+
     const int id;
     char* model;
     char* culoare;
@@ -41,19 +68,39 @@ private:
 
 class Manusi {
 public:
+
+    //Constructor
+
     Manusi() : id(++idManusi), model(nullptr), culoare(nullptr), pret(0.0f) {}
 
+    //Metode publice
+
     void descriere() {
-        cout << "Aceasta este descrierea unei perechi de manusi pentru arc!" << endl;
+        cout << "Descriere Manusi:" << endl;
+        cout << "ID: " << id << endl;
+        cout << "Model: " << (model ? model : "necunoscut") << endl;
+        cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
+        cout << "Pret: " << pret << endl << endl;
     }
 
+    void modificaCuloare(char* culoareNoua) {
+        this->culoare = culoareNoua;
+    }
 private:
+
+   static int idManusi;
+
     const int id;
     char* model;
     char* culoare;
     float pret;
 };
 
+//Initializare id clase fara inline(No cpp17..)
+
+int Arc::idArc = 0;
+int Sageata::idSageata = 0;
+int Manusi::idManusi = 0;
 
 
 int main() {
@@ -62,6 +109,27 @@ int main() {
     arc1->descriere();
     cout << "ID-ul arcului este: " << arc1->getId() << endl;
 
+    Arc* arc2 = new Arc();
+    arc2->descriere();
+    cout << "ID-ul arcului este: " << arc2->getId() << endl;
+
+    arc2->modificaCuloare((char*)"negru");
+
+    arc2->descriere();
+
+    Sageata* sageata1 = new Sageata();
+    sageata1->descriere();
+
+    Manusi* manusa1 = new Manusi();
+    manusa1->descriere();
+    manusa1->modificaCuloare((char*)"alb");
+    manusa1->descriere();
+
+    //Dezaloque memoir :)
     delete arc1; 
+    delete arc2;
+    delete sageata1;
+    delete manusa1;
+
     return 0;
 }

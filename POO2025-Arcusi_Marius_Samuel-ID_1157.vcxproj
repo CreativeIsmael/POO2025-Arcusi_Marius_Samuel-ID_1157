@@ -128,6 +128,7 @@
     <ClCompile Include="Activitate03.cpp" />
     <ClCompile Include="Activitate04.cpp" />
     <ClCompile Include="Proiect.cpp" />
+    <ClCompile Include="testingArea.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
