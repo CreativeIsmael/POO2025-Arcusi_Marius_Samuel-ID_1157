@@ -14,11 +14,11 @@
 //	float* greutatiSeminte;
 //
 //public:
-//	void setGreutate(float greutate) {
-//		if (greutate > 0) {
-//			(*this).greutate = greutate;//-> inseamna dereferentiere+accesare
-//		}
-//	}
+	//void setGreutate(float greutate) {
+	//	if (greutate > 0) {
+	//		(*this).greutate = greutate;//-> inseamna dereferentiere+accesare
+	//	}
+	//}
 //
 //	float getGreutate() {
 //		return this->greutate;
@@ -38,11 +38,11 @@
 //		}
 //	}
 //
-//	void setCuloare(string culoare) {
-//		if (culoare.length() > 0) {
-//			this->culoare = culoare;
-//		}
-//	}
+	/*void setCuloare(string culoare) {
+		if (culoare.length() > 0) {
+			this->culoare = culoare;
+		}
+	}*/
 //
 //	void setGreutatiSeminte(int nrSeminte, float* greutatiSeminte) {
 //		if (nrSeminte > 0) {

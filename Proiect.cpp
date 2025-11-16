@@ -9,7 +9,54 @@ public:
     //Constructor
 
     Arc() : id(++idArc), model(nullptr), culoare(nullptr), pret(0.0f) {}
+    
+
+    //Getters
+
     int getId() const { return id; }
+
+    char* getModel() {
+        return model;
+    }
+
+    char* getCuloare() {
+
+        return culoare;
+    }
+
+    float getPret() {
+        return pret;
+    }
+
+    //Setters
+
+    void setModel(const char* model) {
+        if (strlen(model) > 0) {
+            if (this->model != nullptr) {
+                delete[]this->model;
+            }
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+        }
+
+    }
+
+    void setCuloare(const char* culoare) {
+        if (strlen(culoare) > 0) {
+            if (this->culoare != nullptr) {
+                delete[]this->culoare;
+            }
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+        }
+
+    }
+
+    void setPret(float pret) {
+        if (pret > 0) {
+            (*this).pret = pret;
+        }
+    }
 
     //Metode Publice
 
@@ -21,9 +68,6 @@ public:
         cout << "Pret: " << pret << endl << endl;
     }
 
-    void modificaCuloare(char* culoareNoua) {
-        this->culoare = culoareNoua;
-    }
 private:
 
      static int idArc;
@@ -41,6 +85,65 @@ public:
 
     Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("necunoscut"), pret(0.0f) {}
 
+    //Getters
+
+    int getId() {
+        return id;
+    }
+
+    char* getModel() {
+        return model;
+    }
+
+    char* getCuloare() {
+
+        return culoare;
+    }
+
+    string getMaterial() {
+        return material;
+    }
+
+    float getPret() {
+        return pret;
+    }
+    
+    //Setters
+
+    void setModel(const char* model) {
+        if (strlen(model) > 0) {
+            if (this->model != nullptr) {
+                delete[]this->model;
+            }
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+        }
+
+    }
+
+    void setCuloare(const char* culoare) {
+        if (strlen(culoare) > 0) {
+            if (this->culoare != nullptr) {
+                delete[]this->culoare;
+            }
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+        }
+
+    }
+
+    void setMaterial(string material) {
+        if (material.length() > 0) {
+            this->material = material;
+        }
+    }
+
+    void setPret(float pret) {
+        if (pret > 0) {
+            (*this).pret = pret;
+        }
+    }
+
     //Metode publice
 
     void descriere() {
@@ -52,9 +155,6 @@ public:
         cout << "Pret: " << pret << endl << endl;
     }
 
-    void modificaCuloare(char* culoareNoua) {
-        this->culoare = culoareNoua;
-    }
 private:
 
    static int idSageata;
@@ -73,6 +173,55 @@ public:
 
     Manusi() : id(++idManusi), model(nullptr), culoare(nullptr), pret(0.0f) {}
 
+    //Getters
+
+    int getId() {
+        return id;
+    }
+
+    char* getModel() {
+        return model;
+    }
+
+    char* getCuloare() {
+
+        return culoare;
+    }
+
+    float getPret() {
+        return pret;
+    }
+
+    //Setters
+
+    void setModel(const char* model) {
+        if (strlen(model) > 0) {
+            if (this->model != nullptr) {
+                delete[]this->model;
+            }
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+        }
+
+    }
+
+    void setCuloare(const char* culoare) {
+        if (strlen(culoare) > 0) {
+            if (this->culoare != nullptr) {
+                delete[]this->culoare;
+            }
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+        }
+
+    }
+
+    void setPret(float pret) {
+        if (pret > 0) {
+            (*this).pret = pret;
+        }
+    }
+
     //Metode publice
 
     void descriere() {
@@ -83,9 +232,6 @@ public:
         cout << "Pret: " << pret << endl << endl;
     }
 
-    void modificaCuloare(char* culoareNoua) {
-        this->culoare = culoareNoua;
-    }
 private:
 
    static int idManusi;
@@ -113,7 +259,7 @@ int main() {
     arc2->descriere();
     cout << "ID-ul arcului este: " << arc2->getId() << endl;
 
-    arc2->modificaCuloare((char*)"negru");
+    arc2->setCuloare((char*)"negru");
 
     arc2->descriere();
 
@@ -122,8 +268,14 @@ int main() {
 
     Manusi* manusa1 = new Manusi();
     manusa1->descriere();
-    manusa1->modificaCuloare((char*)"alb");
+    manusa1->setCuloare((char*)"alb");
     manusa1->descriere();
+
+    cout << "--------------------------------- "<< endl;
+
+    int idManusa1=  manusa1->getId();
+    char* culoareManusa1 = manusa1->getCuloare();
+    cout << idManusa1 << " si " << culoareManusa1 << endl;
 
     //Dezaloque memoir :)
     delete arc1; 
