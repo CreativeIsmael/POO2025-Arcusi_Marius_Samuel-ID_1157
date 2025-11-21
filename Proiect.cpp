@@ -8,8 +8,17 @@ public:
 
     //Constructor
 
-    Arc() : id(++idArc), model(nullptr), culoare(nullptr), pret(0.0f) {}
+    Arc() : id(++idArc), model(nullptr), culoare(nullptr), pret(0.0f), marime(nullptr), nrMarimi(0) {}
     
+    //Destructor
+    
+    ~Arc() {
+
+        if (model) delete[] model;
+        if (culoare) delete[] culoare;
+        if (marime) delete[] marime;
+
+    }
 
     //Getters
 
@@ -26,6 +35,15 @@ public:
 
     float getPret() {
         return pret;
+    }
+
+    int* getMarime() {
+        return marime;
+    }
+
+    int getNrMarimi() {
+        return nrMarimi;
+
     }
 
     //Setters
@@ -58,6 +76,23 @@ public:
         }
     }
 
+    void setMarime() {
+        cout << "Introdu numarul de marimi: " << endl;
+        cin >> nrMarimi;
+
+        if (nrMarimi > 0) {
+            if (marime != nullptr) {
+                delete[] marime;
+            }
+
+            marime = new int[nrMarimi];
+            cout << "Introdu marimile (" << nrMarimi << " valori): " << endl;
+            for (int i = 0; i < nrMarimi; i++) {
+                cin >> marime[i];
+            }
+        }
+    }
+
     //Metode Publice
 
     void descriere() {
@@ -65,6 +100,14 @@ public:
         cout << "ID: " << id << endl;
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
+        cout << "Marimi: ";
+        if (marime) {
+            for (int i = 0; i < nrMarimi; i++) cout << marime[i] << " ";
+        }
+        else {
+            cout << "Nicio marime!";
+        }
+        cout << endl;
         cout << "Pret: " << pret << endl << endl;
     }
 
@@ -76,6 +119,8 @@ private:
     char* model;
     char* culoare;
     float pret;
+    int* marime;
+    int nrMarimi;
 };
 
 class Sageata {
@@ -83,11 +128,19 @@ public:
 
     //Constructor
 
-    Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("necunoscut"), pret(0.0f) {}
+    Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("necunoscut"), pret(0.0f), marime(nullptr), nrMarimi(0) {}
+
+    //Destructor 
+
+    ~Sageata() {
+        if (model) delete[] model;
+        if (culoare) delete[] culoare;
+        if (marime) delete[] marime;
+    }
 
     //Getters
 
-    int getId() {
+    int getId() const {
         return id;
     }
 
@@ -108,6 +161,15 @@ public:
         return pret;
     }
     
+    int* getMarime() {
+        return marime;
+    }
+
+    int getNrMarimi() {
+        return nrMarimi;
+
+    }
+
     //Setters
 
     void setModel(const char* model) {
@@ -144,6 +206,23 @@ public:
         }
     }
 
+    void setMarime() {
+        cout << "Introdu numarul de marimi: " << endl;
+        cin >> nrMarimi;
+
+        if (nrMarimi > 0) {
+            if (marime != nullptr) {
+                delete[] marime;
+            }
+
+            marime = new int[nrMarimi];
+            cout << "Introdu marimile (" << nrMarimi << " valori): " << endl;
+            for (int i = 0; i < nrMarimi; i++) {
+                cin >> marime[i];
+            }
+        }
+    }
+
     //Metode publice
 
     void descriere() {
@@ -152,6 +231,14 @@ public:
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
         cout << "Material: " << material << endl;
+        cout << "Marimi: ";
+        if (marime) {
+            for (int i = 0; i < nrMarimi; i++) cout << marime[i] << " ";
+        }
+        else {
+            cout << "Nicio marime!";
+        }
+        cout << endl;
         cout << "Pret: " << pret << endl << endl;
     }
 
@@ -164,6 +251,8 @@ private:
     char* culoare;
     string material;
     float pret;
+    int* marime;
+    int nrMarimi;
 };
 
 class Manusi {
@@ -171,11 +260,21 @@ public:
 
     //Constructor
 
-    Manusi() : id(++idManusi), model(nullptr), culoare(nullptr), pret(0.0f) {}
+    Manusi() : id(++idManusi), model(nullptr), culoare(nullptr), pret(0.0f), marime(nullptr), nrMarimi(0) {}
+
+    //Destructor
+
+    ~Manusi() {
+
+        if (model) delete[] model;
+        if (culoare) delete[] culoare;
+        if (marime) delete[] marime;
+    }
+
 
     //Getters
 
-    int getId() {
+    int getId() const {
         return id;
     }
 
@@ -192,6 +291,14 @@ public:
         return pret;
     }
 
+    int* getMarime() {
+        return marime;
+    }
+
+    int getNrMarimi() {
+        return nrMarimi;
+
+    }
     //Setters
 
     void setModel(const char* model) {
@@ -222,6 +329,25 @@ public:
         }
     }
 
+    void setMarime() {
+        cout << "Introdu numarul de marimi: " <<endl;
+        cin >> nrMarimi;
+
+        if (nrMarimi > 0) {
+            if (marime != nullptr) {
+                delete[] marime;
+            }
+
+            marime = new int[nrMarimi];
+            cout << "Introdu marimile (" << nrMarimi << " valori): " <<endl;
+            for (int i = 0; i < nrMarimi; i++) {
+                cin >> marime[i];
+            }
+            
+        }
+    }
+
+
     //Metode publice
 
     void descriere() {
@@ -229,7 +355,16 @@ public:
         cout << "ID: " << id << endl;
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
+        cout << "Marimi: ";
+        if (marime) {
+            for (int i = 0; i < nrMarimi; i++) cout << marime[i] << " ";
+        }
+        else {
+            cout << "Nicio marime!(Se pare ca asa se scrie corect,gramatical)";
+        }
+        cout << endl;
         cout << "Pret: " << pret << endl << endl;
+        
     }
 
 private:
@@ -240,6 +375,8 @@ private:
     char* model;
     char* culoare;
     float pret;
+    int* marime;
+    int nrMarimi;
 };
 
 //Initializare id clase fara inline(No cpp17..)
@@ -269,6 +406,11 @@ int main() {
     Manusi* manusa1 = new Manusi();
     manusa1->descriere();
     manusa1->setCuloare((char*)"alb");
+    manusa1->setMarime();
+   int numarMarimi =  manusa1->getNrMarimi();
+   cout << numarMarimi << endl;
+   int * marimi = manusa1->getMarime();
+   cout << marimi[0] << endl;
     manusa1->descriere();
 
     cout << "--------------------------------- "<< endl;
