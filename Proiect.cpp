@@ -1,15 +1,82 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 using namespace std;
 
 
 class Arc {
 public:  
 
-    //Constructor
+    //Constructor fara parametrii
 
     Arc() : id(++idArc), model(nullptr), culoare(nullptr), pret(0.0f), marime(nullptr), nrMarimi(0) {}
     
+    //Constructor cu parametrii
+
+    Arc(char* model, char* culoare, float pret, int nrMarimi, int* marime)  : id(++idArc) {
+
+        if (model != nullptr) {
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+
+        }
+        else {
+            this->model = nullptr;
+        }
+        
+        if (culoare != nullptr) {
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+        }
+        else {
+            this->culoare = nullptr;
+        }
+
+        this->pret = (pret > 0) ? pret : 0;
+      
+        this->nrMarimi = (nrMarimi > 0) ? nrMarimi : 0;
+
+        if (marime != nullptr && nrMarimi != 0) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++)
+                this->marime[i] = marime[i];
+        }
+        else {
+            this->marime = nullptr;
+            this->nrMarimi = 0;
+        }
+        
+        
+        
+    }
+
+    //Constructor de copiere 
+
+    Arc(const Arc& a) : id(++idArc) {
+        if (a.model) {
+            this->model = new char[strlen(a.model) + 1];
+            strcpy_s(this->model, strlen(a.model) + 1, a.model);
+        }
+        else { this->model = nullptr; }
+
+        if (a.culoare) {
+            this->culoare = new char[strlen(a.culoare) + 1];
+            strcpy_s(this->culoare, strlen(a.culoare) + 1, a.culoare);
+
+        }
+        else { this->culoare = nullptr; }
+        this->pret = a.pret;
+        this->nrMarimi = a.nrMarimi;
+       
+        if (a.marime) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++) {
+                this ->marime[i] = a.marime[i];
+            }
+        }
+        else { this->marime = nullptr; }
+    }
+
     //Destructor
     
     ~Arc() {
@@ -126,9 +193,78 @@ private:
 class Sageata {
 public:
 
-    //Constructor
+    //Constructor fara parametrii
 
     Sageata() : id(++idSageata), model(nullptr), culoare(nullptr), material("necunoscut"), pret(0.0f), marime(nullptr), nrMarimi(0) {}
+
+    //Constructor cu parametrii
+
+    Sageata(char* model, char* culoare, string material, float pret, int* marime, int nrMarimi) : id(++idSageata) {
+
+        if (model) {
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+        }
+        else { this->model = nullptr; }
+
+        if (culoare) {
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this->culoare, strlen(culoare) + 1, culoare);
+        }
+        else { this->culoare = nullptr; }
+
+        if (material.length() > 0) {
+            this->material = material;
+        }
+        else { this->material = "necunoscut"; } //Mai lasam ternaru sa se odihneasca :)
+
+        this->pret = (pret > 0) ? pret : 0;
+
+        this->nrMarimi = (nrMarimi > 0) ? nrMarimi : 0;
+
+        if (marime && nrMarimi > 0) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++) {
+                this->marime[i] = marime[i];
+            }
+        }
+        else {
+            this->marime = nullptr;
+        }
+    }
+
+    //Constructor de copiere
+
+    Sageata(const Sageata& s) : id(++idSageata) {
+
+        if (s.model) {
+            this->model = new char[strlen(s.model) + 1];
+            strcpy_s(this->model, strlen(s.model) + 1, s.model);
+        }
+        else { this->model = nullptr; }
+
+        if (s.culoare) {
+            this-> culoare = new char[strlen(s.culoare) + 1];
+            strcpy_s(this->culoare, strlen(s.culoare) + 1, s.culoare);
+        }
+        else { this->culoare = nullptr; }
+
+        this->material = s.material;
+        this->pret = s.pret;
+        this->nrMarimi = s.nrMarimi;
+
+        if (s.marime) {
+            this->marime = new int[s.nrMarimi];
+            for (int i = 0; i < s.nrMarimi; i++) {
+                this->marime[i] = s.marime[i];
+            }
+
+        }
+        else { this->marime = nullptr; }
+
+    }
+
+   
 
     //Destructor 
 
@@ -258,9 +394,75 @@ private:
 class Manusi {
 public:
 
-    //Constructor
+    //Constructor fara parametrii
 
     Manusi() : id(++idManusi), model(nullptr), culoare(nullptr), pret(0.0f), marime(nullptr), nrMarimi(0) {}
+
+    //Constructor cu parametrii
+
+    Manusi(char* model, char* culoare, float pret, int* marime, int nrMarimi) : id(++idManusi) {
+
+        if (model) {
+            this->model = new char[strlen(model) + 1];
+            strcpy_s(this->model, strlen(model) + 1, model);
+        }
+        else {
+            this->model = nullptr;
+        }
+
+        if (culoare) {
+            this->culoare = new char[strlen(culoare) + 1];
+            strcpy_s(this ->culoare, strlen(culoare) + 1, culoare);
+        }
+        else {
+            this->culoare = nullptr;
+        }
+
+        
+        this->pret = (pret > 0) ? pret : 0;
+        
+        this->nrMarimi = (nrMarimi > 0) ? nrMarimi : 0;
+
+        if (marime && nrMarimi > 0) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++) {
+                this->marime[i] = marime[i];
+            }
+        }
+        else {
+            this->marime = nullptr;
+        }
+
+    }
+
+    //Constructor de copiere
+
+    Manusi(const Manusi& m) : id(++idManusi) {
+        if (m.model) {
+            this->model = new char[strlen(m.model) + 1];
+            strcpy_s(this->model, strlen(m.model) + 1, m.model);
+
+        }
+        else { this->model = nullptr; }
+
+        if (m.culoare) {
+            this->culoare = new char[strlen(m.culoare) + 1];
+            strcpy_s(this->culoare, strlen(m.culoare) + 1, m.culoare);
+        }
+        else { this->culoare = nullptr; }
+
+        this->pret = m.pret;
+        this->nrMarimi = m.nrMarimi;
+
+        if (m.marime) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++) {
+                this->marime[i] = m.marime[i];
+            }
+
+        }
+        else { this->marime = nullptr; }
+    }
 
     //Destructor
 
@@ -388,6 +590,10 @@ int Manusi::idManusi = 0;
 
 int main() {
     cout << "Hello, world!" << endl;
+    int* v = new int[3] {10, 20, 30}; // V is for vectoras
+
+    //Testing ARC
+
     Arc* arc1 = new Arc();
     arc1->descriere();
     cout << "ID-ul arcului este: " << arc1->getId() << endl;
@@ -397,11 +603,16 @@ int main() {
     cout << "ID-ul arcului este: " << arc2->getId() << endl;
 
     arc2->setCuloare((char*)"negru");
-
+    Arc* arc3 = new Arc((char*)"Adidas", (char*)"Roz", 1.2f, 3, v);
     arc2->descriere();
+    arc3->descriere();
+
+    //Testing SAGEATA
 
     Sageata* sageata1 = new Sageata();
     sageata1->descriere();
+
+    //Testing MANUSI
 
     Manusi* manusa1 = new Manusi();
     manusa1->descriere();
@@ -422,8 +633,9 @@ int main() {
     //Dezaloque memoir :)
     delete arc1; 
     delete arc2;
+    delete arc3;
     delete sageata1;
     delete manusa1;
-
+    delete[] v;
     return 0;
 }
