@@ -87,6 +87,50 @@ public:
 
     }
 
+    //OPERATORES
+
+   //Operator=
+
+    Arc& operator=(const Arc& a) {
+
+        if (this == &a)
+            return *this; // Verifica sa nu fi acelasi obiect 
+
+        if (this->model != nullptr) {
+            delete[] this->model;
+        }
+        if (this->culoare) {
+            delete[] this->culoare;
+        }
+        if (this->marime) {
+            delete[] this->marime;
+        }
+        this->pret = a.pret;
+        this->nrMarimi = a.nrMarimi;
+        if (a.model) {
+            this->model = new char[strlen(a.model) + 1];
+            strcpy_s(this->model, strlen(a.model) + 1, a.model);
+        }
+        else this->model = nullptr;
+        if (a.culoare) {
+            this->culoare = new char[strlen(a.culoare) + 1];
+            strcpy_s(this->culoare, strlen(a.culoare) + 1, a.culoare);
+        }
+        else this->culoare = nullptr;
+        if (a.marime) {
+            this->marime = new int[nrMarimi];
+            for (int i = 0; i < nrMarimi; i++) {
+                this->marime[i] = a.marime[i];
+            }
+        }
+        else this->marime = nullptr;
+        return *this;
+    }
+
+    //Operator<<
+
+    friend ostream& operator<<(ostream& output, const Arc& a);
+
     //Getters
 
     int getId() const { return id; }
@@ -160,10 +204,12 @@ public:
         }
     }
 
+   
+
     //Metode Publice
 
     void descriere() {
-        cout << "Descriere Arc:" << endl;
+        cout << "DESCRIERE ARC:" << endl;
         cout << "ID: " << id << endl;
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
@@ -199,7 +245,7 @@ public:
 
     //Constructor cu parametrii
 
-    Sageata(char* model, char* culoare, string material, float pret, int* marime, int nrMarimi) : id(++idSageata) {
+    Sageata(char* model, char* culoare, string material, float pret, int nrMarimi, int* marime) : id(++idSageata) {
 
         if (model) {
             this->model = new char[strlen(model) + 1];
@@ -251,9 +297,9 @@ public:
 
         this->material = s.material;
         this->pret = s.pret;
-        this->nrMarimi = s.nrMarimi;
+        this->nrMarimi = s.nrMarimi ? s.nrMarimi : 0; 
 
-        if (s.marime) {
+        if (s.marime && nrMarimi > 0) {
             this->marime = new int[s.nrMarimi];
             for (int i = 0; i < s.nrMarimi; i++) {
                 this->marime[i] = s.marime[i];
@@ -273,6 +319,57 @@ public:
         if (culoare) delete[] culoare;
         if (marime) delete[] marime;
     }
+
+    //Operatori
+
+    //Operator=
+
+    Sageata& operator=(const Sageata& s) {
+
+        if (this == &s) {
+            return *this;
+        }
+
+        if (this->model) {
+            delete[] this->model;
+        }
+        if (this->culoare) {
+            delete[] this->culoare;
+        }
+        this->material = s.material;
+        this->pret = s.pret;
+        this->nrMarimi = s.nrMarimi;
+
+        if (s.model) {
+            this->model = new char[strlen(s.model) + 1];
+            strcpy_s(this->model, strlen(s.model) + 1, s.model);
+        }
+        else this->model = nullptr;
+
+        if (s.culoare) {
+            this->culoare = new char[strlen(s.culoare) + 1];
+            strcpy_s(this->culoare, strlen(s.culoare) + 1, s.culoare);
+        }
+        else this->culoare = nullptr;
+        if (this->marime) {
+            delete[] this->marime;
+        }
+        if (s.marime) {
+            
+            this->marime = new int[s.nrMarimi];
+            for (int i = 0; i < s.nrMarimi; i++) {
+                this->marime[i] = s.marime[i];
+            }
+
+        }
+        else this->marime = nullptr;
+
+        return *this;
+    }
+
+     //Operator<<
+
+   friend ostream& operator<<(ostream& output,const Sageata& s);
 
     //Getters
 
@@ -359,10 +456,12 @@ public:
         }
     }
 
+   
+
     //Metode publice
 
     void descriere() {
-        cout << "Descriere Sageata:" << endl;
+        cout << "DESCRIERE SAGEATA:" << endl;
         cout << "ID: " << id << endl;
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
@@ -400,7 +499,7 @@ public:
 
     //Constructor cu parametrii
 
-    Manusi(char* model, char* culoare, float pret, int* marime, int nrMarimi) : id(++idManusi) {
+    Manusi(char* model, char* culoare, float pret, int nrMarimi, int* marime) : id(++idManusi) {
 
         if (model) {
             this->model = new char[strlen(model) + 1];
@@ -472,7 +571,50 @@ public:
         if (culoare) delete[] culoare;
         if (marime) delete[] marime;
     }
+    //Operatori
 
+    //Operator=
+
+    Manusi& operator=(const Manusi& m) {
+        if (this->model) {
+            delete[] this->model;
+        }
+        if (this->culoare) {
+            delete[] this->culoare;
+        }
+        this->pret = m.pret;
+        this->nrMarimi = m.nrMarimi;
+
+        if (m.model) {
+            this->model = new char[strlen(m.model) + 1];
+            strcpy_s(this->model, strlen(m.model) + 1, m.model);
+        }
+        else this->model = nullptr;
+
+        if (m.culoare) {
+            this->culoare = new char[strlen(m.culoare) + 1];
+            strcpy_s(this->culoare, strlen(m.culoare) + 1, m.culoare);
+        }
+        else this->culoare = nullptr;
+
+        if (this->marime) {
+            delete[] this->marime;
+        }
+        if (m.marime) {
+            this->marime = new int[m.nrMarimi];
+            for (int i = 0; i < m.nrMarimi; i++) {
+                this->marime[i] = m.marime[i];
+            } 
+        } else this->marime = nullptr;
+
+        return *this;
+    }
+    
+       
+
+    //Operator<<
+
+    friend ostream& operator<<(ostream& output, const Manusi& m);
 
     //Getters
 
@@ -537,6 +679,7 @@ public:
 
         if (nrMarimi > 0) {
             if (marime != nullptr) {
+
                 delete[] marime;
             }
 
@@ -553,7 +696,7 @@ public:
     //Metode publice
 
     void descriere() {
-        cout << "Descriere Manusi:" << endl;
+        cout << "DESCRIERE MANUSA:" << endl;
         cout << "ID: " << id << endl;
         cout << "Model: " << (model ? model : "necunoscut") << endl;
         cout << "Culoare: " << (culoare ? culoare : "necunoscuta") << endl;
@@ -587,8 +730,34 @@ int Arc::idArc = 0;
 int Sageata::idSageata = 0;
 int Manusi::idManusi = 0;
 
+//Functii globale
+
+
+ostream& operator<<(ostream& output, const Arc& a) {
+    output << "Acesta este un arc model:" << (a.model ? a.model : "Necunoscut") << " de culoare " << (a.culoare ? a.culoare : "Necunoscuta") << " si pret " << a.pret << endl;
+
+    return output;
+}
+
+ostream& operator<<(ostream& output, const Sageata& s) {
+
+    output << "Aceasta este o sageata model:" << (s.model ? s.model : "Necunoscut") << " de culoare " << (s.culoare ? s.culoare : "Necunoscuta") << " material " << s.material << " si pret " << s.pret << endl;
+        
+    return output;
+
+}
+
+ostream& operator<<(ostream& output, const Manusi& m) {
+
+    output << "Aceasta este o manusa model:" << (m.model ? m.model : "Necunoscut") << " culoare " << (m.culoare ? m.culoare : "Necunoscuta") << " si pret " << m.pret << endl;
+
+    return output;
+
+}
 
 int main() {
+    
+
     cout << "Hello, world!" << endl;
     int* v = new int[3] {10, 20, 30}; // V is for vectoras
 
@@ -606,15 +775,23 @@ int main() {
     Arc* arc3 = new Arc((char*)"Adidas", (char*)"Roz", 1.2f, 3, v);
     arc2->descriere();
     arc3->descriere();
+    cout << *arc2;
+    Arc* arc4 = new Arc();
+    *arc4 = *arc3;
+    cout << *arc4;
 
     //Testing SAGEATA
 
     Sageata* sageata1 = new Sageata();
     sageata1->descriere();
-
+    cout << *sageata1;
+    Sageata* sageata2 = new Sageata((char*)"BMW", (char*)"BLUE", "Carbon", 5.3f, 3, v);
+    *sageata1 = *sageata2;
+    cout << *sageata1;
     //Testing MANUSI
 
     Manusi* manusa1 = new Manusi();
+    Manusi* manusa2 = new Manusi((char*)"Porto", (char*)"Gri", 2.3f, 3, v);
     manusa1->descriere();
     manusa1->setCuloare((char*)"alb");
     manusa1->setMarime();
@@ -623,18 +800,24 @@ int main() {
    int * marimi = manusa1->getMarime();
    cout << marimi[0] << endl;
     manusa1->descriere();
-
+    *manusa1 = *manusa2;
     cout << "--------------------------------- "<< endl;
 
     int idManusa1=  manusa1->getId();
     char* culoareManusa1 = manusa1->getCuloare();
     cout << idManusa1 << " si " << culoareManusa1 << endl;
 
+    cout << *manusa1;
+    
+
     //Dezaloque memoir :)
+
     delete arc1; 
     delete arc2;
     delete arc3;
+    delete arc4;
     delete sageata1;
+    delete sageata2;
     delete manusa1;
     delete[] v;
     return 0;
