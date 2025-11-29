@@ -131,6 +131,10 @@ public:
 
     friend ostream& operator<<(ostream& output, const Arc& a);
 
+    //Operator>>
+
+    friend istream& operator>>(istream& input, Arc& a);
+
     //Getters
 
     int getId() const { return id; }
@@ -370,6 +374,10 @@ public:
      //Operator<<
 
    friend ostream& operator<<(ostream& output,const Sageata& s);
+
+   //Operator>>
+
+   friend istream& operator>>(istream& input, Sageata& s);
 
     //Getters
 
@@ -616,6 +624,10 @@ public:
 
     friend ostream& operator<<(ostream& output, const Manusi& m);
 
+    //Operator>>
+
+    friend istream& operator>>(istream& input, Manusi& m);
+
     //Getters
 
     int getId() const {
@@ -732,26 +744,110 @@ int Manusi::idManusi = 0;
 
 //Functii globale
 
-
+//<<
 ostream& operator<<(ostream& output, const Arc& a) {
-    output << "Acesta este un arc model:" << (a.model ? a.model : "Necunoscut") << " de culoare " << (a.culoare ? a.culoare : "Necunoscuta") << " si pret " << a.pret << endl;
-
+    output << "Acesta este un arc model:" << (a.model ? a.model : "Necunoscut") << " de culoare " << (a.culoare ? a.culoare : "Necunoscuta") << " si pret " << a.pret << " cu " << a.nrMarimi << " marimi: " << endl;
+    for (int i = 0; i < a.nrMarimi; i++) {
+        output << a.marime[i] << " ";
+    }
+    output << endl;
     return output;
 }
 
 ostream& operator<<(ostream& output, const Sageata& s) {
 
-    output << "Aceasta este o sageata model:" << (s.model ? s.model : "Necunoscut") << " de culoare " << (s.culoare ? s.culoare : "Necunoscuta") << " material " << s.material << " si pret " << s.pret << endl;
-        
+    output << "Aceasta este o sageata model:" << (s.model ? s.model : "Necunoscut") << " de culoare " << (s.culoare ? s.culoare : "Necunoscuta") << " material " << s.material << " si pret " << s.pret << " cu " << s.nrMarimi << " marimi: " << endl;
+    for (int i = 0; i < s.nrMarimi; i++) {
+        output << s.marime[i] << " ";
+        }
+    output << endl;
     return output;
 
 }
 
 ostream& operator<<(ostream& output, const Manusi& m) {
 
-    output << "Aceasta este o manusa model:" << (m.model ? m.model : "Necunoscut") << " culoare " << (m.culoare ? m.culoare : "Necunoscuta") << " si pret " << m.pret << endl;
-
+    output << "Aceasta este o manusa model:" << (m.model ? m.model : "Necunoscut") << " culoare " << (m.culoare ? m.culoare : "Necunoscuta") << " si pret " << m.pret << " cu " << m.nrMarimi << " marimi disponibile: ";
+    for (int i = 0; i < m.nrMarimi; i++) {
+        output << m.marime[i] << " ";
+    }
+    output << endl;
     return output;
+
+}
+
+//>>
+
+istream& operator>>(istream& input, Manusi& m) {
+
+    char buffer[15];
+
+    cout << " Model: ";
+    input >> buffer;
+    m.setModel(buffer);
+
+    cout << " Culoare: ";
+    input >> buffer;
+    m.setCuloare(buffer);
+
+    float pret;
+    cout << " Pret: ";
+    input >> pret;
+    m.setPret(pret);
+
+   
+    m.setMarime();
+
+    return input;
+}
+
+istream& operator>>(istream& input, Sageata& s) {
+    char buffer[20];
+
+    cout << "Model: ";
+    input >> buffer;
+    s.setModel(buffer);
+
+    cout << "Culoare: ";
+    input >> buffer;
+    s.setCuloare(buffer);
+
+    string material;
+    cout << "Material: ";
+    input >> material;
+    s.setMaterial(material);
+
+    float pret;
+    cout << "Pret: ";
+    input >> pret;
+    s.setPret(pret);
+
+    s.setMarime();
+
+    return input;
+
+}
+
+istream& operator>>(istream& input, Arc& a) {
+
+    char buffer[18];
+
+    cout << "Model: ";
+    input >> buffer;
+    a.setModel(buffer);
+
+    cout << "Culoare: ";
+    input >> buffer;
+    a.setCuloare(buffer);
+
+    float pret;
+    cout << "Pret: ";
+    input >> pret;
+    a.setPret(pret);
+
+    a.setMarime();
+
+    return input;
 
 }
 
@@ -762,6 +858,8 @@ int main() {
     int* v = new int[3] {10, 20, 30}; // V is for vectoras
 
     //Testing ARC
+
+    cout << "-----------------------------------TESTARE CLASA ARC!!----------------------------" << endl;
 
     Arc* arc1 = new Arc();
     arc1->descriere();
@@ -780,34 +878,50 @@ int main() {
     *arc4 = *arc3;
     cout << *arc4;
 
+    cin >> *arc4;
+    cout << *arc4;
+
     //Testing SAGEATA
+
+    cout << "----------------------------------TESTARE CLASA SAGEATA!!--------------------------" << endl;
 
     Sageata* sageata1 = new Sageata();
     sageata1->descriere();
     cout << *sageata1;
     Sageata* sageata2 = new Sageata((char*)"BMW", (char*)"BLUE", "Carbon", 5.3f, 3, v);
     *sageata1 = *sageata2;
-    cout << *sageata1;
+    cout << *sageata2 << endl;
+
+    //cin >> *sageata2;
+    //cout << *sageata2;
+
     //Testing MANUSI
+
+    cout << "----------------------------------TESTARE CLASA MANUSI!!---------------------------" << endl;
 
     Manusi* manusa1 = new Manusi();
     Manusi* manusa2 = new Manusi((char*)"Porto", (char*)"Gri", 2.3f, 3, v);
     manusa1->descriere();
     manusa1->setCuloare((char*)"alb");
-    manusa1->setMarime();
-   int numarMarimi =  manusa1->getNrMarimi();
+    /*manusa1->setMarime();*/
+   /*int numarMarimi =  manusa1->getNrMarimi();
    cout << numarMarimi << endl;
    int * marimi = manusa1->getMarime();
-   cout << marimi[0] << endl;
+   cout << marimi[0] << endl;*/
     manusa1->descriere();
     *manusa1 = *manusa2;
     cout << "--------------------------------- "<< endl;
 
-    int idManusa1=  manusa1->getId();
+   /* int idManusa1=  manusa1->getId();
     char* culoareManusa1 = manusa1->getCuloare();
     cout << idManusa1 << " si " << culoareManusa1 << endl;
 
-    cout << *manusa1;
+    cout << *manusa1 << endl;*/
+
+    /*cin >> *manusa1;
+    cout << *manusa1 << endl;*/
+
+
     
 
     //Dezaloque memoir :)
@@ -819,6 +933,7 @@ int main() {
     delete sageata1;
     delete sageata2;
     delete manusa1;
+    delete manusa2;
     delete[] v;
     return 0;
 }
