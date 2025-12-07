@@ -127,6 +127,9 @@
     <ClCompile Include="Activitate02.cpp" />
     <ClCompile Include="Activitate03.cpp" />
     <ClCompile Include="Activitate04.cpp" />
+    <ClCompile Include="Activitate05.cpp" />
+    <ClCompile Include="Activitate06a.cpp" />
+    <ClCompile Include="Activitate06b.cpp" />
     <ClCompile Include="Proiect.cpp" />
     <ClCompile Include="testingArea.cpp" />
   </ItemGroup>

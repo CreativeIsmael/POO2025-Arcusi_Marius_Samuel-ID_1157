@@ -33,5 +33,14 @@
     <ClCompile Include="testingArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Activitate05.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Activitate06a.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Activitate06b.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
