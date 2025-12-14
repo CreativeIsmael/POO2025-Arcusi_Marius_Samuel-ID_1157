@@ -287,6 +287,20 @@ public:
         cout << "Pret: " << pret << endl << endl;
     }
 
+    static void arcCompare(const Arc& a1, const Arc& a2) {
+
+    
+        if (a1.pret > a2.pret) {
+            cout << "Arcul " << (a1.model ? a1.model : "Arc 1") << " este mai scump decat arcul " << (a2.model ? a2.model : "Arc 2") << endl;
+        }else if(a1.pret == a2.pret) {
+            cout << "Arcurile sunt de aceiasi valoare." << endl;
+        }
+        else {
+            cout << "Arcul " << (a2.model ? a2.model : "Arc 2") << " este mai valoros decat arcul " << (a1.model ? a1.model : "Arc 1") << endl;
+        }
+    }
+
+
 private:
 
      static int idArc;
@@ -599,6 +613,20 @@ public:
         cout << "Pret: " << pret << endl << endl;
     }
 
+    static void sageataCompare(const Sageata& s1, const Sageata& s2) {
+
+
+        if (s1.pret > s2.pret) {
+            cout << "Sageata " << (s1.model ? s1.model : "Sageata 1") << " este mai scumpa decat sageata " << (s2.model ? s2.model : "Sageata 2") << endl;
+        }
+        else if (s1.pret == s2.pret) {
+            cout << "Sagetile sunt de aceiasi valoare." << endl;
+        }
+        else {
+            cout << "Sageata " << (s2.model ? s2.model : "Sageata 2") << " este mai valoroasa decat sageata " << (s1.model ? s1.model : "Sageata 1") << endl;
+        }
+    }
+
 private:
 
    static int idSageata;
@@ -886,6 +914,21 @@ public:
         
     }
 
+    static void manusiCompare(const Manusi& m1, const Manusi& m2) {
+
+
+        if (m1.pret > m2.pret) {
+            cout << "Manusa " << (m1.model ? m1.model : "Manusa 1") << " este mai scumpa decat manusa " << (m2.model ? m2.model : "Manusa 2") << endl;
+        }
+        else if (m1.pret == m2.pret) {
+            cout << "Manusile sunt de aceiasi valoare." << endl;
+        }
+        else {
+            cout << "Manusa " << (m2.model ? m2.model : "Manusa 2") << " este mai valoroasa decat manusa " << (m1.model ? m1.model : "Manusa 1") << endl;
+        }
+    }
+    
+
 private:
 
    static int idManusi;
@@ -905,7 +948,13 @@ int Sageata::idSageata = 0;
 int Manusi::idManusi = 0;
 
 //Functii globale
-//
+// 
+// Functie afisare linii :)
+
+void visualSeparator() {
+    cout << "----------------------------------------------------------" << endl;
+}
+
 //<<
 ostream& operator<<(ostream& output, const Arc& a) {
     output << "Acesta este un arc model:" << (a.model ? a.model : "Necunoscut") << " de culoare " << (a.culoare ? a.culoare : "Necunoscuta") << " si pret " << a.pret << " cu " << a.nrMarimi << " marimi: " << endl;
@@ -1052,7 +1101,8 @@ int main() {
     myInputFileStream.close();
 
     cout << *arc2;
-
+    visualSeparator();
+    Arc::arcCompare(*arc1, *arc3);
     /*Testing SAGEATA*/
 
     cout << "----------------------------------TESTARE CLASA SAGEATA!!--------------------------" << endl;
@@ -1070,7 +1120,8 @@ int main() {
     fstream outputFile("Sagete.txt", ios::out);
     outputFile << *sageata2;
     outputFile.close();
-
+    visualSeparator();
+    Sageata::sageataCompare(*sageata1, *sageata2);
     /*Testing MANUSI*/
 
     cout << "----------------------------------TESTARE CLASA MANUSI!!---------------------------" << endl;
@@ -1095,7 +1146,8 @@ int main() {
     ifstream in("Manusi.txt", ios::in);
     in >> *manusa3;
     manusa3->descriere();
-
+    visualSeparator();
+    Manusi::manusiCompare(*manusa1, *manusa2);
 
     cout << "--------------------------------- "<< endl;
 
